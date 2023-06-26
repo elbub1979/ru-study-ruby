@@ -15,7 +15,7 @@ module Exercise
       def chars_count(films, threshold)
         film_names = films.filter_map { |film| film['name'] if film['rating_kinopoisk'].to_f >= threshold }
 
-        film_names.inject(0) { |sum, name| sum + name.scan(/и/).size }
+        film_names.inject(0) { |sum, name| sum + name.count('и') }
       end
     end
   end
