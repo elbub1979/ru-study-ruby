@@ -10,7 +10,7 @@ module Exercise
       end
 
       def search(array, query, min = 0, max = array.size - 1)
-        return -1 if array.empty? || wrong_value?(array, query, min, max) || out_of_array?(array, query, min, max)
+        return -1 if array.empty? || wrong_value?(array, query) || out_of_array?(array, query, min, max)
 
         mid = (min + max) / 2
 
@@ -32,10 +32,8 @@ module Exercise
         max_value
       end
 
-      def wrong_value?(*args)
-        array, query, min, max = args
-
-        array[min] == array[max] && array[min] != query
+      def wrong_value?(array, query)
+        array.size == 1 && array.first != query
       end
 
       def out_of_array?(*args)
