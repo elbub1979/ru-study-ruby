@@ -32,11 +32,7 @@ module Exercise
       def my_reduce(accumulator = nil, &block)
         return accumulator if size.zero?
 
-        accumulator = if accumulator.nil?
-                        first
-                      else
-                        block.call(accumulator, first)
-                      end
+        accumulator = accumulator.nil? ? first : block.call(accumulator, first)
 
         self.class.new(self[1..]).reduce(accumulator, &block)
       end
