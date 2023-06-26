@@ -7,10 +7,11 @@ module Exercise
       # Написать свою функцию my_each
       def my_each(&block)
         return to_enum unless block_given?
+        return self if size.zero?
 
-        for element in self
-          block.call(element)
-        end
+        block.call(first)
+        self.class.new(self[1..]).my_each(&block)
+        self
       end
 
       # Написать свою функцию my_map
@@ -37,11 +38,7 @@ module Exercise
                         block.call(accumulator, first)
                       end
 
-        self[1..].each do |element|
-          accumulator = block.call(accumulator, element)
-        end
-
-        accumulator
+        self.class.new(self[1..]).reduce(accumulator, &block)
       end
     end
   end
